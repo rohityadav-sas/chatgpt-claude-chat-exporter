@@ -2,7 +2,7 @@
 
 Name: ChatGPT & Claude Exporter – PDF & Markdown
 
-Summary: Export ChatGPT, Claude, Gemini and more to PDF, Markdown, JSON or text. Copy webpages as Markdown. Private, local processing.
+Summary: Export AI conversations to Markdown, JSON, Text and PDF
 
 Category: Workflow & Planning
 

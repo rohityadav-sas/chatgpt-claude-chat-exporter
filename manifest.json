@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ChatGPT & Claude Exporter – PDF & Markdown",
   "version": "1.0.0",
-  "description": "Export ChatGPT, Claude, Gemini and more to PDF, Markdown, JSON or text. Copy webpages as Markdown. Private, local processing.",
+  "description": "Export AI conversations to Markdown, JSON, Text and PDF",
   "permissions": [
     "activeTab",
     "scripting",

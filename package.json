@@ -1,7 +1,7 @@
 {
   "name": "chatgpt-claude-exporter",
   "version": "1.0.0",
-  "description": "Export ChatGPT, Claude, Gemini and more to PDF, Markdown, JSON or text. Copy webpages as Markdown. Private, local processing.",
+  "description": "Export AI conversations to Markdown, JSON, Text and PDF",
   "scripts": {
     "test": "node --test tests/*.test.js",
     "build": "node scripts/build.mjs",
