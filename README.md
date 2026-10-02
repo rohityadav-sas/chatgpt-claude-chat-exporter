@@ -13,8 +13,6 @@ Export AI conversations to Markdown, JSON, Text and PDF
 ![Formats](https://img.shields.io/badge/Export-4_formats-255c46?style=flat-square)
 ![Providers](https://img.shields.io/badge/AI-8_providers-255c46?style=flat-square)
 
-[Get started](#get-started) · [Features](#made-for-the-chats-worth-keeping) · [Develop](#build-something-good) · [Privacy](PRIVACY.md)
-
 </div>
 
 <br />
