@@ -17,13 +17,13 @@ Export AI conversations to Markdown, JSON, Text and PDF
 
 <br />
 
-## One extension. Your favorite AI.
+## Supported AI
 
 <img src="docs/media/providers.svg" alt="ChatGPT, Claude, Gemini, Grok, DeepSeek, Qwen, Perplexity and Mistral" width="100%" />
 
 Save the conversation you have open, choose the messages that matter, and take them into your notes, documents or next project.
 
-## Four ways to keep it
+## Formats
 
 <img src="docs/media/formats.svg" alt="PDF, Markdown, JSON and plain text export formats" width="100%" />
 
