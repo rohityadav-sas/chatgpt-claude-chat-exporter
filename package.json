@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-claude-exporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export AI conversations to Markdown, JSON, Text and PDF",
   "scripts": {
     "test": "node --test tests/*.test.js",

@@ -24,7 +24,7 @@ npm run test:website
 npm run package
 ```
 
-`npm run package` builds a minified production extension without source maps and creates `releases/chatgpt-claude-exporter-1.0.0.zip`. The manifest is at the ZIP root. The repository contains source and tests; generated builds, browser profiles, screenshots, old releases and local checkpoints are ignored.
+`npm run package` builds a minified production extension without source maps and creates `releases/chatgpt-claude-exporter-1.0.1.zip`. The manifest is at the ZIP root. The repository contains source and tests; generated builds, browser profiles, screenshots, old releases and local checkpoints are ignored.
 
 ## Scope and limitations
 
@@ -40,3 +40,4 @@ npm run package
 `src/core/`: conversion and capture; `src/direct/`: provider data readers; `src/providers/`: DOM fallbacks; `src/ui/`: shared export interface; `scripts/`: build, packaging and preview; `tests/`: unit and browser fixtures; `assets/`: local icons, fonts and licenses.
 
 See [privacy policy](PRIVACY.md), [publishing instructions](docs/PUBLISHING.md) and [store listing](docs/STORE-LISTING.md). Third-party notices accompany the production package. This is an independent extension, not affiliated with the supported AI providers.
+

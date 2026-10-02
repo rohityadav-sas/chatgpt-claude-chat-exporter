@@ -1,3 +1,4 @@
+import { formatIcons } from "./format-icons.js";
 import { libraryIcons } from "./library-icons.js";
 // Back arrow: Lucide arrow-left (ISC), https://lucide.dev/icons/arrow-left
 const paths = {
@@ -13,9 +14,9 @@ const paths = {
   txt: "M5 3h14v18H5V3zm3 5h8m-8 4h8m-8 4h5",
 };
 export function icon(document, kind = "export") {
-  if (libraryIcons[kind]) {
+  if (formatIcons[kind] || libraryIcons[kind]) {
     const source = new document.defaultView.DOMParser().parseFromString(
-      libraryIcons[kind],
+      formatIcons[kind] || libraryIcons[kind],
       "image/svg+xml",
     ).documentElement;
     const svg = document.importNode(source, true);
