@@ -1,0 +1,290 @@
+.message-picker {
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.message-picker *,
+.message-picker *::before {
+  box-sizing: border-box;
+}
+.message-picker [hidden] {
+  display: none !important;
+}
+.selection-toggle {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ace-accent);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.selection-toggle:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.selection-badge {
+  border: 1px solid var(--ace-border);
+  border-radius: 6px;
+  padding: 3px 6px;
+  color: var(--ace-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+.selection-badge:empty {
+  display: none;
+}
+.selection-detail {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--ace-border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.selection-tools {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 1px solid var(--ace-border);
+  flex: none;
+}
+.selection-tools button {
+  padding: 6px 2px;
+  border: 1px solid var(--ace-border);
+  border-radius: 5px;
+  color: var(--ace-ink);
+  background: var(--ace-surface);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  width: auto;
+}
+.selection-tools button:last-child {
+  padding-inline: 10px;
+}
+.selection-tools button:hover {
+  background: var(--ace-soft);
+}
+.message-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  min-height: 64px;
+  max-height: 230px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ace-border) transparent;
+}
+.message-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--ace-border);
+}
+.message-row:nth-child(even) {
+  background: var(--ace-soft);
+}
+.message-row:hover {
+  background: var(--ace-hover);
+}
+.message-row:last-child {
+  border-bottom: 0;
+}
+.message-row input,
+.selection-footer input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--ace-accent);
+  cursor: pointer;
+  flex: none;
+}
+.message-number {
+  font-size: 10px;
+  color: var(--ace-muted);
+  min-width: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.message-copy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 0;
+  gap: 7px;
+}
+.role-label {
+  width: 18px;
+  flex: none;
+  color: var(--ace-muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+.message-preview {
+  min-width: 0;
+  color: var(--ace-ink);
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.expanded .message-row {
+  align-items: flex-start;
+}
+.expanded .message-row input,
+.expanded .message-number {
+  margin-top: 3px;
+}
+.expanded .message-preview {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.selection-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px;
+  color: var(--ace-muted);
+  border-top: 1px solid var(--ace-border);
+  font-size: 11px;
+  flex: none;
+}
+.selection-footer label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+}
+.message-picker button:focus-visible,
+.message-picker input:focus-visible {
+  outline: 2px solid #78a98d;
+  outline-offset: 2px;
+}
+.expanded .message-copy {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.selection-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.picker-back {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+.select-all {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding-inline: 3px;
+  cursor: pointer;
+}
+.select-all input {
+  accent-color: var(--ace-accent);
+  width: 14px;
+  height: 14px;
+  margin: 0;
+}
+
+.selection-tools button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+}
+.selection-tools button svg,
+.role-label svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  vertical-align: middle;
+}
+.selection-tools button:last-child {
+  padding-inline: 2px;
+}
+
+.message-picker:not(.picker-open) .selection-toggle {
+  border: 1px solid var(--ace-border);
+  border-radius: 9px;
+  padding: 11px 12px;
+  background: color-mix(in srgb, var(--ace-surface) 65%, var(--ace-soft));
+  margin: 10px 0 2px;
+  color: var(--ace-accent);
+}
+.message-picker:not(.picker-open) .selection-toggle:not(:disabled):hover {
+  background: var(--ace-hover);
+  border-color: var(--ace-accent);
+}
+.selection-toggle:disabled {
+  opacity: 1;
+}
+.picker-selection-icon {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+.selection-badge.loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.selection-badge.loading:before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--ace-border);
+  border-top-color: var(--ace-accent);
+  border-radius: 50%;
+  animation: picker-spin 0.8s linear infinite;
+}
+@keyframes picker-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selection-badge.loading:before {
+    animation: none;
+  }
+}
+
+.message-picker.picker-open .selection-toggle {
+  border: 1px solid var(--ace-border);
+  border-radius: 9px;
+  padding: 11px 12px;
+  background: color-mix(in srgb, var(--ace-surface) 65%, var(--ace-soft));
+  margin: 8px 0;
+  color: var(--ace-accent);
+}
+.message-picker.picker-open .selection-toggle:hover {
+  background: var(--ace-hover);
+  border-color: var(--ace-accent);
+}
+
+/* One aligned icon slot for every speaker and filter. */
+.role-label { display: inline-flex; align-items: center; justify-content: center; height: 18px; }
+.selection-tools button svg, .role-label svg { width: 15px; height: 15px; min-width: 15px; max-width: 15px; min-height: 15px; max-height: 15px; display: block; }

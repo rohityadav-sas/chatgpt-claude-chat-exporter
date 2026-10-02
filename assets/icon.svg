@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <title>Chat Exporter</title>
+  <rect width="128" height="128" rx="32" fill="#255c46"/>
+  <path d="M69 34H44c-9 0-16 7-16 16v24c0 9 7 16 16 16h1v13l18-13h15c9 0 16-7 16-16v-7" stroke="#fffefb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m55 73 42-42M76 31h21v21" stroke="#fffefb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

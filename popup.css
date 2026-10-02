@@ -1,0 +1,364 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  color-scheme: light;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #78a98d;
+  outline-offset: 3px;
+}
+.export-heading {
+  display: flex;
+  align-items: center;
+}
+h1 {
+  margin: 0;
+}
+fieldset {
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.formats {
+  display: grid;
+}
+.formats label {
+  position: relative;
+  cursor: pointer;
+}
+.formats input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.formats span {
+  border: 1px solid var(--ace-border);
+  border-radius: 10px;
+  font-weight: 600;
+  background: var(--ace-surface);
+}
+.formats input:checked + span {
+  border-color: #83a58a;
+  box-shadow: 0 0 0 1px #83a58a;
+}
+.formats input:focus-visible + span {
+  outline: 2px solid #78a98d;
+  outline-offset: 2px;
+}
+.export-save {
+  width: 100%;
+  font-weight: 600;
+}
+#status {
+  color: var(--ace-accent);
+}
+#status.error {
+  color: #a43c30;
+} /* Compact export controls share the in-page panel's palette and layout. */
+.popup {
+  --ace-surface: #fffefb;
+  --ace-ink: #25352e;
+  --ace-muted: #68776c;
+  --ace-border: #dce4da;
+  --ace-accent: #255c46;
+  --ace-soft: #eef4e9;
+  --ace-hover: #e4eedf;
+  width: 400px;
+  max-height: 600px;
+  color: var(--ace-ink);
+  background: var(--ace-surface);
+}
+.popup [hidden] {
+  display: none !important;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.popup .export-heading {
+  padding: 24px 24px 0;
+  border: 0;
+  justify-content: space-between;
+  gap: 12px;
+}
+.popup .export-heading h1 {
+  font-size: 22px;
+  letter-spacing: -0.65px;
+  font-weight: 650;
+}
+.popup .close-export {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ace-muted);
+}
+.popup .close-export svg {
+  width: 22px;
+  height: 22px;
+}
+.popup main {
+  padding: 22px 24px 24px;
+}
+.popup #summary {
+  margin: 0;
+}
+.popup #title {
+  width: 100%;
+  padding: 12px;
+  margin: 0;
+  background: var(--ace-surface);
+  border: 1px solid var(--ace-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ace-ink);
+}
+.popup #count {
+  font-size: 13px;
+  color: var(--ace-muted);
+  margin: 9px 0 12px;
+}
+.popup fieldset {
+  margin: 18px 0;
+}
+.popup .formats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+.popup .formats span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 82px;
+  padding: 0;
+  font-size: 14px;
+  color: var(--ace-muted);
+}
+.popup .formats svg {
+  width: 26px;
+  height: 26px;
+}
+.popup .formats input:checked + span {
+  background: var(--ace-soft);
+  color: var(--ace-accent);
+}
+.popup .export-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--ace-accent);
+  color: var(--ace-surface);
+  font-size: 16px;
+}
+.popup .export-save svg {
+  width: 21px;
+  height: 21px;
+}
+.popup .export-save:hover:enabled {
+  background: #1d4938;
+}
+.popup #status {
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 9px 0 0;
+  min-height: 0;
+}
+.popup #status:empty {
+  display: none;
+}
+.popup .export-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  color: var(--ace-muted);
+  font-size: 10px;
+}
+.popup #extract {
+  padding: 0;
+  width: auto;
+  border: 0;
+  background: transparent;
+  color: var(--ace-muted);
+  font-size: 10px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (prefers-color-scheme: dark) {
+  .popup {
+    --ace-surface: #202822;
+    --ace-ink: #ecf1eb;
+    --ace-muted: #a9b6aa;
+    --ace-border: #435045;
+    --ace-accent: #b5d6b8;
+    --ace-soft: #29382d;
+    --ace-hover: #35483a;
+    color-scheme: dark;
+  }
+  .popup .export-save:hover:enabled {
+    background: #cae4cc;
+  }
+  .popup .formats span {
+    background: var(--ace-surface);
+    border-color: var(--ace-border);
+  }
+}
+.popup .export-actions {
+  display: flex;
+  gap: 10px;
+}
+.popup .compact-format {
+  display: none;
+  border: 1px solid var(--ace-border);
+  border-radius: 8px;
+  padding: 10px;
+  font: inherit;
+  color: var(--ace-ink);
+  background: var(--ace-surface);
+}
+.popup.selecting {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+ .popup.selecting main {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  padding-top: 12px;
+}
+.popup.selecting #title,
+.popup.selecting fieldset {
+  display: none;
+}
+.popup.selecting #message-selection {
+  display: flex;
+  flex: 0 1 auto;
+  min-height: 0;
+  margin-bottom: 16px;
+}
+.popup.selecting .message-picker,
+.popup.selecting .selection-detail {
+  flex: 0 1 auto;
+}
+.popup.selecting .message-list {
+  max-height: 300px;
+}
+.popup.selecting .compact-format {
+  display: block;
+  width: 124px;
+}
+.popup.selecting .export-save {
+  flex: 1;
+  width: auto;
+}
+.popup.selecting .export-actions,
+.popup.selecting #summary,
+.popup.selecting .export-footer,
+.popup.selecting #status {
+  flex: none;
+}
+
+.export-progress[hidden],
+.status[hidden],
+#status[hidden] {
+  display: none;
+}
+.export-progress {
+  margin-top: 12px;
+}
+.progress-label {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #527260;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 5px;
+}
+.progress-track {
+  height: 3px;
+  border-radius: 9px;
+  background: #e2ebe2;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 9px;
+  background: #255c46;
+  transition: width 0.18s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill {
+    transition: none;
+  }
+}
+
+#count,
+.export-footer {
+  display: none;
+}
+
+.popup:not(.selecting) .export-heading {
+  margin-bottom: 6px;
+  align-items: center;
+}
+.popup:not(.selecting) .export-heading h1 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ace-muted);
+}
+
+.popup:not(.selecting) main {
+  padding-top: 0;
+}
+.popup:not(.selecting) .export-heading h1 {
+  letter-spacing: 0;
+}
+
+.export-actions{align-items:stretch;gap:10px}
+.export-actions .save,.export-actions .export-save{height:44px!important;border-radius:9px!important;margin:0!important}
+
+/* Keep the trial slide inside the panel shell. */
+.popup { overflow-x: hidden; }

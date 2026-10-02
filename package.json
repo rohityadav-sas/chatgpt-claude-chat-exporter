@@ -1,0 +1,30 @@
+{
+  "name": "chatgpt-claude-exporter",
+  "version": "1.0.0",
+  "description": "Export ChatGPT, Claude, Gemini and more to PDF, Markdown, JSON or text. Copy webpages as Markdown. Private, local processing.",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/preview.mjs",
+    "test:browser": "node tests/extension.mjs",
+    "test:in-page": "node tests/in-page.mjs",
+    "test:website": "node tests/website-browser.mjs",
+    "build:release": "node scripts/build.mjs --release",
+    "package": "npm run build:release && node scripts/package.mjs"
+  },
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "entities": "^8.1.0",
+    "marked": "^18.0.14",
+    "pdfmake": "^0.3.11",
+    "turndown": "^7.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.1.1",
+    "prettier": "^3.9.9"
+  },
+  "private": true
+}

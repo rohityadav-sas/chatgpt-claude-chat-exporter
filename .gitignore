@@ -1,0 +1,10 @@
+node_modules/
+dist/
+artifacts/
+releases/
+checkpoints/
+.env
+.env.*
+*.pem
+*.key
+*.log
