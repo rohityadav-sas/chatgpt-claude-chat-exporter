@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Keep the conversation. Take it anywhere.</title><desc id="desc">AI Chat Exporter. Export AI conversations to Markdown, JSON, Text and PDF.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#102f27"/><stop offset="1" stop-color="#225b46"/></linearGradient><clipPath id="clip"><rect width="1200" height="420" rx="26"/></clipPath></defs>
+<g clip-path="url(#clip)"><rect width="1200" height="420" fill="url(#bg)"/><circle cx="1130" cy="50" r="200" fill="#75c99f" opacity=".07"/><circle cx="1070" cy="-30" r="285" fill="none" stroke="#8de5b3" stroke-opacity=".1"/>
+<svg x="64" y="60" width="68" height="68" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <title>Chat Exporter</title>
+  <rect width="128" height="128" rx="32" fill="#255c46"/>
+  <path d="M69 34H44c-9 0-16 7-16 16v24c0 9 7 16 16 16h1v13l18-13h15c9 0 16-7 16-16v-7" stroke="#fffefb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m55 73 42-42M76 31h21v21" stroke="#fffefb" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<text x="150" y="88" fill="#dcf5e8" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="3">AI CHAT EXPORTER</text><text x="150" y="112" fill="#9cbfb0" font-family="Arial,sans-serif" font-size="13">LOCAL FIRST · MADE TO KEEP</text>
+<text x="64" y="203" fill="#fffef7" font-family="Arial,sans-serif" font-size="52" font-weight="700" letter-spacing="-2">Keep the conversation.</text><text x="64" y="263" fill="#a4ebbf" font-family="Arial,sans-serif" font-size="52" font-weight="700" letter-spacing="-2">Take it anywhere.</text>
+<text x="66" y="308" fill="#c9ddd3" font-family="Arial,sans-serif" font-size="17">Export AI conversations to Markdown, JSON, Text and PDF</text>
+<g transform="translate(836 117) rotate(-7)"><rect width="240" height="168" rx="20" fill="#fcfff9"/><rect x="28" y="30" width="122" height="12" rx="6" fill="#dceade"/><rect x="68" y="61" width="144" height="38" rx="12" fill="#d7f0df"/><rect x="28" y="114" width="163" height="12" rx="6" fill="#dceade"/><rect x="28" y="136" width="110" height="8" rx="4" fill="#e9f0e9"/></g>
+<g transform="translate(0 342)"><path d="M-200 60C0 -20 200 140 400 60S800 -20 1000 60S1400 140 1600 60V180H-200Z" fill="#8cdba7" opacity=".1"><animateTransform attributeName="transform" type="translate" values="-100 0;100 0;-100 0" dur="12s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.5;1" keySplines=".45 0 .55 1;.45 0 .55 1"/></path><path d="M-200 60C0 -20 200 140 400 60S800 -20 1000 60S1400 140 1600 60V180H-200Z" fill="#abefc3" opacity=".12" transform="translate(0 22)"><animateTransform attributeName="transform" type="translate" values="90 22;-90 22;90 22" dur="16s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.5;1" keySplines=".45 0 .55 1;.45 0 .55 1"/></path></g></g></svg>
