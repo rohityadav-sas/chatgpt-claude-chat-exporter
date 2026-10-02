@@ -29,10 +29,8 @@ Save the conversation you have open, choose the messages that matter, and take t
 
 <div align="center">
 
-**Keep what matters.**
-
 [Privacy policy](PRIVACY.md) · [Publishing guide](docs/PUBLISHING.md) · [Store listing](docs/STORE-LISTING.md) · [Third-party notices](THIRD-PARTY-NOTICES.txt)
 
-<sub>Independent extension. Not affiliated with OpenAI, Anthropic or the other supported AI providers.<br />Provider marks retain their original artwork and colors. README wave animation is decorative; its static frame remains readable.</sub>
+<sub>Independent extension. Not affiliated with OpenAI, Anthropic or the other supported AI providers.<br /></sub>
 
 </div>
