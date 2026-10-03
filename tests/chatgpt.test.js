@@ -39,7 +39,7 @@ test("ChatGPT: preserves order, rich text, duplicate prompts, math and attachmen
     JSON.parse(createExport(chat, "json").content).messages.length,
     3,
   );
-  assert.ok(createExport(chat, "md").content.includes("## You"));
+  assert.ok(createExport(chat, "md").content.includes("## User"));
   assert.ok(createExport(chat, "txt").content.includes("नेपाली"));
 });
 test("Empty chats and lookalike domains fail clearly", () => {

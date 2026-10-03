@@ -1,8 +1,9 @@
+import { speakerName } from "./speaker.js";
 export function toMarkdown(chat) {
-  return `# ${chat.title.replace(/\n/g, " ")}\n\nSource: ${chat.url}\nExported: ${chat.exportedAt}\n\n> ${chat.scope}\n\n${chat.messages.map((message) => `## ${message.role === "user" ? "You" : "Assistant"}\n\n${message.markdown}`).join("\n\n---\n\n")}\n`;
+  return `# ${chat.title.replace(/\n/g, " ")}\n\nSource: ${chat.url}\nExported: ${chat.exportedAt}\n\n> ${chat.scope}\n\n${chat.messages.map((message) => `## ${speakerName(chat, message)}\n\n${message.markdown}`).join("\n\n---\n\n")}\n`;
 }
 export function toText(chat) {
-  return `${chat.title}\n${chat.url}\nExported: ${chat.exportedAt}\n${chat.scope}\n\n${chat.messages.map((message) => `${message.role === "user" ? "YOU" : "ASSISTANT"}\n${message.text}`).join("\n\n----------------------------------------\n\n")}\n`;
+  return `${chat.title}\n${chat.url}\nExported: ${chat.exportedAt}\n${chat.scope}\n\n${chat.messages.map((message) => `${speakerName(chat, message)}\n${message.text}`).join("\n\n----------------------------------------\n\n")}\n`;
 }
 export function createExport(chat, format) {
   const formats = {
@@ -10,7 +11,18 @@ export function createExport(chat, format) {
     txt: ["text/plain;charset=utf-8", toText],
     json: [
       "application/json;charset=utf-8",
-      (value) => JSON.stringify(value, null, 2),
+      (value) =>
+        JSON.stringify(
+          {
+            ...value,
+            messages: value.messages.map((message) => ({
+              ...message,
+              speaker: speakerName(value, message),
+            })),
+          },
+          null,
+          2,
+        ),
     ],
   };
   if (!formats[format]) throw new Error("Unknown export format.");

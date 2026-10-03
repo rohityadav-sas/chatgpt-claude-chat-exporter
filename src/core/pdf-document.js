@@ -1,3 +1,4 @@
+import { aiName } from "./speaker.js";
 import { libraryIcons } from "../ui/library-icons.js";
 import { providerLogoSvg } from "./provider-logo-display.js";
 import { decodeHTML } from "entities";
@@ -206,7 +207,7 @@ function chatMessage(message, provider, providerId) {
     width: "*",
     stack: [
       {
-        text: human ? "YOU" : provider.toUpperCase(),
+        text: human ? "User" : provider,
         alignment: human ? "right" : "left",
         color: "#527260",
         fontSize: 8,
@@ -232,19 +233,7 @@ function chatMessage(message, provider, providerId) {
   };
 }
 export function pdfDocument(chat) {
-  const provider =
-    {
-      chatgpt: "ChatGPT",
-      claude: "Claude",
-      deepseek: "DeepSeek",
-      grok: "Grok",
-      gemini: "Gemini",
-      qwen: "Qwen",
-      perplexity: "Perplexity",
-      mistral: "Mistral",
-    }[chat.provider] ||
-    chat.provider ||
-    "AI";
+  const provider = aiName(chat.provider);
   return {
     info: { title: chat.title, creator: "AI Chat Exporter" },
     pageSize: "A4",
