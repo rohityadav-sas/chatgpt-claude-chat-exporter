@@ -283,13 +283,13 @@ try {
   await popup.getByRole("button", { name: "Invert", exact: true }).click();
   assert.equal(await popup.locator(".selection-badge").textContent(), "20/20");
   await popup.locator("#copy").click();
-  await popup.waitForFunction(() => document.querySelector("#copy svg path")?.getAttribute("d") === "m5 12 4 4L19 6");
+  await popup.waitForFunction(() => document.querySelector("#copy svg path")?.getAttribute("d") === "m5 13 4 4L19 7");
   assert.equal(await popup.getByText("Copied.", { exact: true }).count(), 0);
   const widths = await popup.locator(".export-actions").evaluate(node => [node.querySelector("#copy").getBoundingClientRect().width, node.querySelector("#export").getBoundingClientRect().width]);
   assert.ok(Math.abs(widths[0] - widths[1]) < 1);
   await popup.locator(".format-trigger").click();
   await popup.getByRole("option", { name: "Markdown", exact: true }).click();
-  assert.notEqual(await popup.locator("#copy svg path").getAttribute("d"), "m5 12 4 4L19 6");
+  assert.notEqual(await popup.locator("#copy svg path").getAttribute("d"), "m5 13 4 4L19 7");
   assert.equal(await popup.locator("#copy").isEnabled(), true);
   assert.equal(await popup.locator("#extract").count(), 0);
   // Clear empty chat state: stale exports must be disabled after failed extraction.

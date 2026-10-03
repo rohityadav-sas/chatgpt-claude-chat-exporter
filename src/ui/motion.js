@@ -57,7 +57,7 @@ export function completed(button) {
     );
     if (confirmations.get(svg) !== state) return;
     svg.innerHTML =
-      '<path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      '<path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
     const path = svg.querySelector("path");
     const draw = motion(
       path,
