@@ -2,6 +2,7 @@ import { formatIcons } from "./format-icons.js";
 import { libraryIcons } from "./library-icons.js";
 // Back arrow: Lucide arrow-left (ISC), https://lucide.dev/icons/arrow-left
 const paths = {
+  copy: "M9 9h12v12H9zM15 9V3H3v12h6",
   chevron: "m6 9 6 6 6-6",
   user: "M20 21v-2a7 7 0 0 0-14 0v2M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0",
   invert: "M3 7h16m-4-4 4 4-4 4M21 17H5m4-4-4 4 4 4",

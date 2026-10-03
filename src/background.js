@@ -35,6 +35,22 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
         .catch(() => {});
     return false;
   }
+  if (message?.type === "ai-chat-exporter:copy-conversation") {
+    (async () => {
+      const fromPopup =
+        sender.id === chrome.runtime.id &&
+        sender.url === chrome.runtime.getURL(`${scriptDirectory}popup.html`);
+      if (!fromPopup) await requireConversationTab(sender, message.url);
+      if (typeof message.text !== "string")
+        throw Error("Invalid clipboard content.");
+      await ensureToolsDocument();
+      return await chrome.runtime.sendMessage({
+        type: "ai-chat-exporter:copy-clipboard",
+        text: message.text,
+      });
+    })().then(respond, (error) => respond({ error: error.message }));
+    return true;
+  }
   if (message?.type === "ai-chat-exporter:read-direct") {
     (async () => {
       await requireConversationTab(sender, message.url);

@@ -4,6 +4,7 @@ import { pageConversationTitle } from "../core/conversation-title.js";
 import { createExportProgress, downloadPdf } from "./export-progress.js";
 import styles from "./in-page.css";
 import { captureConversation } from "../core/capture.js";
+import { copyExport } from "../core/copy.js";
 import { downloadExport } from "../core/download.js";
 import { createMessagePicker } from "./message-picker.js";
 import { icon } from "./icons.js";
@@ -44,7 +45,7 @@ export function createSignature(document) {
   button.setAttribute("aria-expanded", "false");
   // Keep provider header handlers from treating Export as their own action.
   for (const type of ["pointerdown", "mousedown", "click"]) {
-    shadow.addEventListener(type, event => event.stopPropagation());
+    shadow.addEventListener(type, (event) => event.stopPropagation());
   }
   shadow.append(element(document, "style", { textContent: styles }), button);
   return { host, button };
@@ -99,20 +100,33 @@ export function createExportPanel(document, signature, provider) {
       type: "button",
       disabled: true,
     },
-    [icon(document), "Export"],
+    [icon(document), "Download"],
   );
-  save.setAttribute("aria-label", "Export selected messages");
-  const refresh = element(document, "button", {
-    className: "refresh",
-    type: "button",
-    textContent: "Extract again",
-    disabled: true,
+  save.setAttribute("aria-label", "Download selected messages");
+  const copy = element(
+    document,
+    "button",
+    { className: "copy-action", type: "button", disabled: true },
+    [icon(document, "copy"), "Copy"],
+  );
+  const providerPill = element(document, "span", {
+    className: "provider-pill",
+    textContent: provider.name + " � supported",
   });
+  function syncActions() {
+    save.disabled =
+      capturing || exporting || !conversation || picker.count === 0;
+    copy.disabled = save.disabled;
+    copy.title =
+      format === "pdf"
+        ? "Copy as Markdown (PDF is download only)"
+        : "Copy selected messages";
+  }
   const formats = element(document, "div", { className: "formats" });
   const picker = createMessagePicker(
     document,
     (count) => {
-      save.disabled = capturing || exporting || !conversation || count === 0;
+      syncActions();
     },
     (open) => {
       panel.classList.toggle("selecting", open);
@@ -122,6 +136,7 @@ export function createExportPanel(document, signature, provider) {
   let format = "md";
   const formatMenu = createFormatMenu(document, (value) => {
     format = value;
+    syncActions();
     formats.querySelector(`input[value="${value}"]`).checked = true;
   });
   const compactFormat = formatMenu.host;
@@ -139,6 +154,7 @@ export function createExportPanel(document, signature, provider) {
     );
     input.addEventListener("change", () => {
       format = value;
+      syncActions();
       formatMenu.setValue(value);
     });
   }
@@ -147,7 +163,11 @@ export function createExportPanel(document, signature, provider) {
     "section",
     { className: "panel", tabIndex: -1 },
     [
-      element(document, "div", { className: "heading" }, [heading, close]),
+      element(document, "div", { className: "heading" }, [
+        heading,
+        providerPill,
+        close,
+      ]),
       titleLabel,
       title,
       count,
@@ -161,6 +181,7 @@ export function createExportPanel(document, signature, provider) {
       ]),
       element(document, "div", { className: "export-actions" }, [
         compactFormat,
+        copy,
         save,
       ]),
       status,
@@ -221,7 +242,7 @@ export function createExportPanel(document, signature, provider) {
     conversation = undefined;
     picker.loading();
     const request = ++generation;
-    save.disabled = refresh.disabled = true;
+    save.disabled = copy.disabled = true;
     const previewTitle = pageConversationTitle(
       document,
       document.defaultView.location.href,
@@ -256,8 +277,7 @@ export function createExportPanel(document, signature, provider) {
     } finally {
       if (request === generation) {
         capturing = false;
-        refresh.disabled = false;
-        save.disabled = !conversation || picker.count === 0;
+        syncActions();
       }
     }
   }
@@ -291,8 +311,8 @@ export function createExportPanel(document, signature, provider) {
     host.style.display === "none" || closing ? open() : hide(),
   );
   close.addEventListener("click", () => hide());
-  refresh.addEventListener("click", extract);
-  save.addEventListener("click", async () => {
+
+  async function performAction(copying = false) {
     if (exporting || !conversation || !picker.count) return;
     if (conversation.url !== document.defaultView.location.href) {
       conversation = undefined;
@@ -308,26 +328,34 @@ export function createExportPanel(document, signature, provider) {
       title: title.value.trim() || conversation.title,
     });
     exporting = true;
-    save.disabled = true;
-    progress.start();
+    syncActions();
+    if (!copying) progress.start();
     setStatus("");
     try {
-      if (format === "pdf") {
+      if (copying) {
+        await copyExport(chat, format);
+        completed(copy);
+        setStatus("Copied" + (format === "pdf" ? " as Markdown" : "") + ".");
+      } else if (format === "pdf") {
         await downloadPdf(chat, progress.update);
       } else {
         downloadExport(chat, format, document);
         progress.update(85);
       }
-      progress.finish();
-      completed(save);
+      if (!copying) {
+        progress.finish();
+        completed(save);
+      }
     } catch (error) {
       progress.hide();
       setStatus(error.message, true);
     } finally {
       exporting = false;
-      save.disabled = !conversation || picker.count === 0;
+      syncActions();
     }
-  });
+  }
+  save.addEventListener("click", () => performAction());
+  copy.addEventListener("click", () => performAction(true));
   document.addEventListener(
     "pointerdown",
     (event) => {

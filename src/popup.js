@@ -3,6 +3,7 @@ import { createFormatMenu } from "./ui/format-menu.js";
 import { conversationTitle } from "./core/conversation-title.js";
 import { createExportProgress, downloadPdf } from "./ui/export-progress.js";
 import { findProvider, providers } from "./providers/index.js";
+import { copyExport } from "./core/copy.js";
 import { downloadExport } from "./core/download.js";
 import { createMessagePicker } from "./ui/message-picker.js";
 import { icon } from "./ui/icons.js";
@@ -19,7 +20,7 @@ const labels = { pdf: "PDF", md: "Markdown", json: "JSON", txt: "Text" };
 const picker = createMessagePicker(
   document,
   (count) => {
-    $("export").disabled = exporting || !conversation || count === 0;
+    syncActions();
   },
   (open) => {
     document.body.classList.toggle("selecting", open);
@@ -39,6 +40,15 @@ formatMenu.host.id = "compact-format";
 $("compact-format").replaceWith(formatMenu.host);
 $("message-selection").append(picker.host);
 $("export").prepend(icon(document));
+$("copy").prepend(icon(document, "copy"));
+function syncActions() {
+  $("export").disabled = $("copy").disabled =
+    exporting || !conversation || !picker.count;
+  $("copy").title =
+    selectedFormat() === "pdf"
+      ? "Copy as Markdown (PDF is download only)"
+      : "Copy selected messages";
+}
 $("close").append(icon(document, "close"));
 $("close").addEventListener("click", () => window.close());
 document
@@ -63,7 +73,7 @@ async function init() {
     $("provider").textContent = provider
       ? `${provider.name} · supported`
       : "Open a supported conversation";
-    $("extract").disabled = !provider;
+
     if (!provider)
       status(
         `Supported: ${providers.map((item) => item.name).join(", ")}.`,
@@ -75,7 +85,7 @@ async function init() {
   }
 }
 async function extract() {
-  $("extract").disabled = true;
+  $("copy").disabled = true;
   $("export").disabled = true;
   conversation = undefined;
   picker.loading();
@@ -108,43 +118,52 @@ async function extract() {
     picker.unavailable();
     status(error.message, true);
   } finally {
-    $("extract").disabled = false;
+    syncActions();
   }
 }
-$("extract").addEventListener("click", extract);
+
 document.querySelectorAll('input[name="format"]').forEach((input) =>
   input.addEventListener("change", () => {
     const format = selectedFormat();
     formatMenu.setValue(format);
+    syncActions();
     status("");
   }),
 );
-$("export").addEventListener("click", async () => {
+async function performAction(copying = false) {
   if (exporting || !conversation || !picker.count) return;
   const chat = picker.apply({
     ...conversation,
     title: $("title").value.trim() || conversation.title,
   });
   exporting = true;
-  $("export").disabled = true;
-  progress.start();
+  syncActions();
+  if (!copying) progress.start();
   status("");
   try {
     const format = selectedFormat();
-    if (format === "pdf") {
+    if (copying) {
+      await copyExport(chat, format);
+      completed($("copy"));
+      status("Copied" + (format === "pdf" ? " as Markdown" : "") + ".");
+    } else if (format === "pdf") {
       await downloadPdf(chat, progress.update);
     } else {
       downloadExport(chat, format);
       progress.update(85);
     }
-    progress.finish();
-    completed($("export"));
+    if (!copying) {
+      progress.finish();
+      completed($("export"));
+    }
   } catch (error) {
     progress.hide();
     status(error.message, true);
   } finally {
     exporting = false;
-    $("export").disabled = !conversation || !picker.count;
+    syncActions();
   }
-});
+}
+$("export").addEventListener("click", () => performAction());
+$("copy").addEventListener("click", () => performAction(true));
 init();

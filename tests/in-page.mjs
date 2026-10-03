@@ -245,7 +245,7 @@ try {
         .click();
       assert.deepEqual(errors, []);
       assert.equal(
-        await panel.locator(".format-trigger").innerText(),
+        await panel.locator(".format-trigger").evaluate(node => Array.from(node.childNodes).filter(n => n.nodeType === Node.TEXT_NODE).map(n => n.textContent).join("")),
         { md: "Markdown", json: "JSON", txt: "Text" }[format],
       );
       const pending = page.waitForEvent("download");
@@ -291,7 +291,7 @@ try {
     await page.keyboard.press("Home");
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Enter");
-    assert.equal(await panel.locator(".format-trigger").innerText(), "PDF");
+    assert.equal(await panel.locator(".format-trigger").evaluate(node => Array.from(node.childNodes).filter(n => n.nodeType === Node.TEXT_NODE).map(n => n.textContent).join("")), "PDF");
     assert.equal(await panel.locator(".format-menu").isVisible(), false);
     await assertPdfDownload(
       context,

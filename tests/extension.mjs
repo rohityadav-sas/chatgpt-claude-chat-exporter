@@ -282,6 +282,10 @@ try {
   assert.equal(await popup.locator("#export").isDisabled(), true);
   await popup.getByRole("button", { name: "Invert", exact: true }).click();
   assert.equal(await popup.locator(".selection-badge").textContent(), "20/20");
+  await popup.locator("#copy").click();
+  await popup.getByText("Copied.", { exact: true }).waitFor();
+  assert.equal(await popup.locator("#copy").isEnabled(), true);
+  assert.equal(await popup.locator("#extract").count(), 0);
   // Clear empty chat state: stale exports must be disabled after failed extraction.
   await fixture.unroute("https://chatgpt.com/backend-api/conversation/virtual");
   await fixture.locator("#space").evaluate((node) => node.replaceChildren());
