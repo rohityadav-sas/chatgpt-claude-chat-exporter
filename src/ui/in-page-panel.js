@@ -1,5 +1,5 @@
 import controlStyles from "./export-controls.css";
-import { motion, completed } from "./motion.js";
+import { motion, completed, resetCompleted } from "./motion.js";
 import { createFormatMenu } from "./format-menu.js";
 import { pageConversationTitle } from "../core/conversation-title.js";
 import { createExportProgress, downloadPdf } from "./export-progress.js";
@@ -119,9 +119,7 @@ export function createExportPanel(document, signature, provider) {
       capturing || exporting || !conversation || picker.count === 0;
     copy.disabled = save.disabled || format === "pdf";
     copy.title =
-      format === "pdf"
-        ? "PDF is download only"
-        : "Copy selected messages";
+      format === "pdf" ? "PDF is download only" : "Copy selected messages";
   }
   const formats = element(document, "div", { className: "formats" });
   const picker = createMessagePicker(
@@ -136,6 +134,7 @@ export function createExportPanel(document, signature, provider) {
   );
   let format = "md";
   const formatMenu = createFormatMenu(document, (value) => {
+    resetCompleted(copy);
     format = value;
     syncActions();
     formats.querySelector(`input[value="${value}"]`).checked = true;
@@ -154,6 +153,7 @@ export function createExportPanel(document, signature, provider) {
       element(document, "label", { className: "format" }, [input, tile]),
     );
     input.addEventListener("change", () => {
+      resetCompleted(copy);
       format = value;
       syncActions();
       formatMenu.setValue(value);
@@ -191,7 +191,10 @@ export function createExportPanel(document, signature, provider) {
   );
   panel.setAttribute("role", "dialog");
   panel.setAttribute("aria-labelledby", heading.id);
-  shadow.append(element(document, "style", { textContent: styles + "\n" + controlStyles }), panel);
+  shadow.append(
+    element(document, "style", { textContent: styles + "\n" + controlStyles }),
+    panel,
+  );
   document.body.append(host);
   let conversation;
   let capturing = false;
@@ -324,6 +327,7 @@ export function createExportPanel(document, signature, provider) {
       );
       return;
     }
+    const actionFormat = format;
     const chat = picker.apply({
       ...conversation,
       title: title.value.trim() || conversation.title,
@@ -335,8 +339,7 @@ export function createExportPanel(document, signature, provider) {
     try {
       if (copying) {
         await copyExport(chat, format);
-        completed(copy);
-  
+        if (format === actionFormat) completed(copy);
       } else if (format === "pdf") {
         await downloadPdf(chat, progress.update);
       } else {

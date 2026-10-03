@@ -1,5 +1,5 @@
 import controlStyles from "./ui/export-controls.css";
-import { completed } from "./ui/motion.js";
+import { completed, resetCompleted } from "./ui/motion.js";
 import { createFormatMenu } from "./ui/format-menu.js";
 import { conversationTitle } from "./core/conversation-title.js";
 import { createExportProgress, downloadPdf } from "./ui/export-progress.js";
@@ -46,8 +46,7 @@ $("message-selection").append(picker.host);
 $("export").prepend(icon(document));
 $("copy").prepend(icon(document, "copy"));
 function syncActions() {
-  $("export").disabled =
-    exporting || !conversation || !picker.count;
+  $("export").disabled = exporting || !conversation || !picker.count;
   $("copy").disabled = $("export").disabled || selectedFormat() === "pdf";
   $("copy").title =
     selectedFormat() === "pdf"
@@ -130,6 +129,7 @@ async function extract() {
 document.querySelectorAll('input[name="format"]').forEach((input) =>
   input.addEventListener("change", () => {
     const format = selectedFormat();
+    resetCompleted($("copy"));
     formatMenu.setValue(format);
     syncActions();
     status("");
@@ -137,6 +137,7 @@ document.querySelectorAll('input[name="format"]').forEach((input) =>
 );
 async function performAction(copying = false) {
   if (exporting || !conversation || !picker.count) return;
+  const actionFormat = selectedFormat();
   const chat = picker.apply({
     ...conversation,
     title: $("title").value.trim() || conversation.title,
@@ -149,8 +150,7 @@ async function performAction(copying = false) {
     const format = selectedFormat();
     if (copying) {
       await copyExport(chat, format);
-      completed($("copy"));
-
+      if (selectedFormat() === actionFormat) completed($("copy"));
     } else if (format === "pdf") {
       await downloadPdf(chat, progress.update);
     } else {
