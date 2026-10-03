@@ -1,3 +1,4 @@
+import controlStyles from "./export-controls.css";
 import { motion, completed } from "./motion.js";
 import { createFormatMenu } from "./format-menu.js";
 import { pageConversationTitle } from "../core/conversation-title.js";
@@ -73,7 +74,7 @@ export function createExportPanel(document, signature, provider) {
   const progress = createExportProgress(document);
   const count = element(document, "p", {
     className: "count",
-    textContent: "Reading conversationâ€¦",
+    textContent: "Reading conversation\u2026",
   });
   const status = element(document, "p", {
     className: "status",
@@ -190,7 +191,7 @@ export function createExportPanel(document, signature, provider) {
   );
   panel.setAttribute("role", "dialog");
   panel.setAttribute("aria-labelledby", heading.id);
-  shadow.append(element(document, "style", { textContent: styles }), panel);
+  shadow.append(element(document, "style", { textContent: styles + "\n" + controlStyles }), panel);
   document.body.append(host);
   let conversation;
   let capturing = false;
@@ -250,7 +251,7 @@ export function createExportPanel(document, signature, provider) {
     );
     title.value = previewTitle;
     title.disabled = false;
-    count.textContent = "Reading conversationâ€¦";
+    count.textContent = "Reading conversation\u2026";
     setStatus("");
     try {
       const chat = await captureConversation(
@@ -263,7 +264,7 @@ export function createExportPanel(document, signature, provider) {
       if (request !== generation) return;
       conversation = chat;
       if (title.value === previewTitle) title.value = chat.title;
-      count.textContent = `${chat.messages.length} messages Â· ${chat.messages.filter((message) => message.role === "user").length} from you`;
+      count.textContent = `${chat.messages.length} messages \u00b7 ${chat.messages.filter((message) => message.role === "user").length} from you`;
       title.disabled = false;
       picker.setConversation(chat);
       const partial = chat.capture && !chat.capture.complete;

@@ -72,10 +72,10 @@ try {
     chrome.tabs.query = async () => [tab];
   }, fixtureTab);
   await popup.reload();
-  await popup.getByText("ChatGPT Â· supported").waitFor({ state: "attached" });
+  await popup.getByText("ChatGPT \u00b7 supported").waitFor();
   await popup.reload();
   await popup
-    .getByText("2 messages Â· 1 from you")
+    .getByText("2 messages \u00b7 1 from you")
     .waitFor({ state: "attached" });
   for (const format of ["md", "json", "txt"]) {
     await popup.locator(`input[value="${format}"]`).check();
@@ -232,7 +232,7 @@ try {
   });
   await popup.reload();
   await popup
-    .getByText("20 messages Â· 10 from you")
+    .getByText("20 messages \u00b7 10 from you")
     .waitFor({ state: "attached" });
   const virtualCapture = await popup.evaluate(
     async (tabId) =>

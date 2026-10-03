@@ -1,3 +1,4 @@
+import controlStyles from "./ui/export-controls.css";
 import { completed } from "./ui/motion.js";
 import { createFormatMenu } from "./ui/format-menu.js";
 import { conversationTitle } from "./core/conversation-title.js";
@@ -8,6 +9,9 @@ import { downloadExport } from "./core/download.js";
 import { createMessagePicker } from "./ui/message-picker.js";
 import { icon } from "./ui/icons.js";
 import { captureStatus } from "./core/capture-status.js";
+const sharedStyle = document.createElement("style");
+sharedStyle.textContent = controlStyles;
+document.head.append(sharedStyle);
 const $ = (id) => document.getElementById(id);
 // Resource paths are relative to the popup's directory, which may be dist/.
 const scriptDirectory = new URL(".", location.href).pathname.slice(1);
@@ -71,7 +75,7 @@ async function init() {
     [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const provider = findProvider(tab?.url);
     $("provider").textContent = provider
-      ? `${provider.name} Â· supported`
+      ? `${provider.name} \u00b7 supported`
       : "Open a supported conversation";
 
     if (!provider)
@@ -109,7 +113,7 @@ async function extract() {
     if ($("title").value === previewTitle)
       $("title").value = conversation.title;
     $("count").textContent =
-      `${conversation.messages.length} messages Â· ${conversation.messages.filter((message) => message.role === "user").length} from you`;
+      `${conversation.messages.length} messages \u00b7 ${conversation.messages.filter((message) => message.role === "user").length} from you`;
     $("summary").hidden = false;
     picker.setConversation(conversation);
     const partial = conversation.capture && !conversation.capture.complete;
