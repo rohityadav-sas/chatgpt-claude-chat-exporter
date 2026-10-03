@@ -110,10 +110,6 @@ export function createExportPanel(document, signature, provider) {
     { className: "copy-action", type: "button", disabled: true },
     [icon(document, "copy"), "Copy"],
   );
-  const providerPill = element(document, "span", {
-    className: "provider-pill",
-    textContent: provider.name + " \u00b7 supported",
-  });
   function syncActions() {
     save.disabled =
       capturing || exporting || !conversation || picker.count === 0;
@@ -166,7 +162,6 @@ export function createExportPanel(document, signature, provider) {
     [
       element(document, "div", { className: "heading" }, [
         heading,
-        providerPill,
         close,
       ]),
       titleLabel,

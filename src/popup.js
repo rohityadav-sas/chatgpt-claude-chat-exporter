@@ -1,3 +1,4 @@
+import { providerIcon } from "./ui/provider-icon.js";
 import controlStyles from "./ui/export-controls.css";
 import { completed, resetCompleted } from "./ui/motion.js";
 import { createFormatMenu } from "./ui/format-menu.js";
@@ -74,10 +75,9 @@ async function init() {
   try {
     [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const provider = findProvider(tab?.url);
-    $("provider").textContent = provider
-      ? `${provider.name} \u00b7 supported`
-      : "Open a supported conversation";
-
+    $("provider").replaceChildren(...(provider
+      ? [providerIcon(document, provider.id), `${provider.name} \u00b7 supported`]
+      : ["Open a supported conversation"]));
     if (!provider)
       status(
         `Supported: ${providers.map((item) => item.name).join(", ")}.`,
