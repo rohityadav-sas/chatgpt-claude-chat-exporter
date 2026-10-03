@@ -112,7 +112,10 @@ export function createExportPanel(document, signature, provider) {
   );
   function syncActions() {
     save.disabled =
-      capturing || exporting || !conversation || picker.count === 0;
+      capturing ||
+      (exporting && !clipboardBusy) ||
+      !conversation ||
+      picker.count === 0;
     copy.disabled = save.disabled || format === "pdf";
     copy.title =
       format === "pdf" ? "PDF is download only" : "Copy selected messages";
@@ -160,10 +163,7 @@ export function createExportPanel(document, signature, provider) {
     "section",
     { className: "panel", tabIndex: -1 },
     [
-      element(document, "div", { className: "heading" }, [
-        heading,
-        close,
-      ]),
+      element(document, "div", { className: "heading" }, [heading, close]),
       titleLabel,
       title,
       count,
@@ -194,6 +194,7 @@ export function createExportPanel(document, signature, provider) {
   let conversation;
   let capturing = false;
   let exporting = false;
+  let clipboardBusy = false;
   let generation = 0;
   function setStatus(text, error = false) {
     status.textContent = text;
@@ -327,7 +328,9 @@ export function createExportPanel(document, signature, provider) {
       ...conversation,
       title: title.value.trim() || conversation.title,
     });
+    clipboardBusy = copying;
     exporting = true;
+    copy.setAttribute("aria-busy", String(copying));
     syncActions();
     if (!copying) progress.start();
     setStatus("");
@@ -350,6 +353,8 @@ export function createExportPanel(document, signature, provider) {
       setStatus(error.message, true);
     } finally {
       exporting = false;
+      clipboardBusy = false;
+      copy.removeAttribute("aria-busy");
       syncActions();
     }
   }

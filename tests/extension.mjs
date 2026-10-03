@@ -282,11 +282,19 @@ try {
   assert.equal(await popup.locator("#export").isDisabled(), true);
   await popup.getByRole("button", { name: "Invert", exact: true }).click();
   assert.equal(await popup.locator(".selection-badge").textContent(), "20/20");
+  await popup.evaluate(() => {
+    window.actionFades = 0;
+    const observer = new MutationObserver(records => {
+      window.actionFades += records.filter(r => r.attributeName === "disabled").length;
+    });
+    observer.observe(document.querySelector(".export-actions"), { attributes: true, subtree: true, attributeFilter: ["disabled"] });
+  });
   await popup.locator("#copy").click();
   await popup.waitForFunction(() => document.querySelector("#copy svg path")?.getAttribute("d") === "m5 13 4 4L19 7");
   assert.equal(await popup.getByText("Copied.", { exact: true }).count(), 0);
   const widths = await popup.locator(".export-actions").evaluate(node => [node.querySelector("#copy").getBoundingClientRect().width, node.querySelector("#export").getBoundingClientRect().width]);
   assert.ok(Math.abs(widths[0] - widths[1]) < 1);
+  assert.equal(await popup.evaluate(() => window.actionFades), 0);
   await popup.locator(".format-trigger").click();
   await popup.getByRole("option", { name: "Markdown", exact: true }).click();
   assert.notEqual(await popup.locator("#copy svg path").getAttribute("d"), "m5 13 4 4L19 7");

@@ -20,6 +20,7 @@ const progress = createExportProgress(document);
 $("status").after(progress.host);
 let conversation;
 let exporting = false;
+let clipboardBusy = false;
 let tab;
 const labels = { pdf: "PDF", md: "Markdown", json: "JSON", txt: "Text" };
 const picker = createMessagePicker(
@@ -47,7 +48,8 @@ $("message-selection").append(picker.host);
 $("export").prepend(icon(document));
 $("copy").prepend(icon(document, "copy"));
 function syncActions() {
-  $("export").disabled = exporting || !conversation || !picker.count;
+  $("export").disabled =
+    (exporting && !clipboardBusy) || !conversation || !picker.count;
   $("copy").disabled = $("export").disabled || selectedFormat() === "pdf";
   $("copy").title =
     selectedFormat() === "pdf"
@@ -75,9 +77,14 @@ async function init() {
   try {
     [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const provider = findProvider(tab?.url);
-    $("provider").replaceChildren(...(provider
-      ? [providerIcon(document, provider.id), `${provider.name} \u00b7 supported`]
-      : ["Open a supported conversation"]));
+    $("provider").replaceChildren(
+      ...(provider
+        ? [
+            providerIcon(document, provider.id),
+            `${provider.name} \u00b7 supported`,
+          ]
+        : ["Open a supported conversation"]),
+    );
     if (!provider)
       status(
         `Supported: ${providers.map((item) => item.name).join(", ")}.`,
@@ -142,7 +149,9 @@ async function performAction(copying = false) {
     ...conversation,
     title: $("title").value.trim() || conversation.title,
   });
+  clipboardBusy = copying;
   exporting = true;
+  $("copy").setAttribute("aria-busy", String(copying));
   syncActions();
   if (!copying) progress.start();
   status("");
@@ -166,6 +175,8 @@ async function performAction(copying = false) {
     status(error.message, true);
   } finally {
     exporting = false;
+    clipboardBusy = false;
+    $("copy").removeAttribute("aria-busy");
     syncActions();
   }
 }
