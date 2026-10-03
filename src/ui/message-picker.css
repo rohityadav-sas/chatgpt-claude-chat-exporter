@@ -16,14 +16,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10.8px;
   width: 100%;
-  padding: 8px 0;
+  padding: 7.2px 0;
   border: 0;
   background: transparent;
   color: var(--ace-accent);
   font: inherit;
-  font-size: 12px;
+  font-size: 10.8px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -32,11 +32,11 @@
   cursor: default;
 }
 .selection-badge {
-  border: 1px solid var(--ace-border);
-  border-radius: 6px;
-  padding: 3px 6px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 5.4px;
+  padding: 2.7px 5.4px;
   color: var(--ace-muted);
-  font-size: 11px;
+  font-size: 9.9px;
   font-variant-numeric: tabular-nums;
   font-weight: 400;
 }
@@ -48,33 +48,33 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  border: 1px solid var(--ace-border);
-  border-radius: 10px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 9px;
   overflow: hidden;
-  margin-top: 4px;
+  margin-top: 3.6px;
 }
 .selection-tools {
   display: grid;
   grid-template-columns: auto repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  padding: 10px;
-  border-bottom: 1px solid var(--ace-border);
+  gap: 5.4px;
+  padding: 9px;
+  border-bottom: 0.9px solid var(--ace-border);
   flex: none;
 }
 .selection-tools button {
-  padding: 6px 2px;
-  border: 1px solid var(--ace-border);
-  border-radius: 5px;
+  padding: 5.4px 1.8px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 4.5px;
   color: var(--ace-ink);
   background: var(--ace-surface);
   font: inherit;
-  font-size: 11px;
+  font-size: 9.9px;
   font-weight: 500;
   cursor: pointer;
   width: auto;
 }
 .selection-tools button:last-child {
-  padding-inline: 10px;
+  padding-inline: 9px;
 }
 .selection-tools button:hover {
   background: var(--ace-soft);
@@ -83,18 +83,18 @@
   flex: 1 1 auto;
   overflow-y: auto;
   overscroll-behavior: contain;
-  min-height: 64px;
-  max-height: 230px;
+  min-height: 57.6px;
+  max-height: 207px;
   scrollbar-width: thin;
   scrollbar-color: var(--ace-border) transparent;
 }
 .message-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px;
+  gap: 7.2px;
+  padding: 9px;
   cursor: pointer;
-  border-bottom: 1px solid var(--ace-border);
+  border-bottom: 0.9px solid var(--ace-border);
 }
 .message-row:nth-child(even) {
   background: var(--ace-soft);
@@ -107,17 +107,17 @@
 }
 .message-row input,
 .selection-footer input {
-  width: 15px;
-  height: 15px;
+  width: 13.5px;
+  height: 13.5px;
   margin: 0;
   accent-color: var(--ace-accent);
   cursor: pointer;
   flex: none;
 }
 .message-number {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--ace-muted);
-  min-width: 14px;
+  min-width: 12.6px;
   font-variant-numeric: tabular-nums;
 }
 .message-copy {
@@ -125,13 +125,13 @@
   flex-direction: row;
   align-items: center;
   min-width: 0;
-  gap: 7px;
+  gap: 6.3px;
 }
 .role-label {
-  width: 18px;
+  width: 16.2px;
   flex: none;
   color: var(--ace-muted);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
 }
 .message-preview {
@@ -141,7 +141,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: 10.8px;
   line-height: 1.5;
 }
 .expanded .message-row {
@@ -149,7 +149,7 @@
 }
 .expanded .message-row input,
 .expanded .message-number {
-  margin-top: 3px;
+  margin-top: 2.7px;
 }
 .expanded .message-preview {
   white-space: pre-wrap;
@@ -159,25 +159,25 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
-  padding: 10px;
+  gap: 9px;
+  padding: 9px;
   color: var(--ace-muted);
-  border-top: 1px solid var(--ace-border);
-  font-size: 11px;
+  border-top: 0.9px solid var(--ace-border);
+  font-size: 9.9px;
   flex: none;
 }
 .selection-footer label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5.4px;
   cursor: pointer;
   font: inherit;
   margin: 0;
 }
 .message-picker button:focus-visible,
 .message-picker input:focus-visible {
-  outline: 2px solid #78a98d;
-  outline-offset: 2px;
+  outline: 1.8px solid #78a98d;
+  outline-offset: 1.8px;
 }
 .expanded .message-copy {
   flex-direction: column;
@@ -187,25 +187,25 @@
 .selection-toggle-label {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6.3px;
 }
 .picker-back {
-  width: 17px;
-  height: 17px;
+  width: 15.3px;
+  height: 15.3px;
   flex: none;
 }
 .select-all {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  padding-inline: 3px;
+  gap: 4.5px;
+  font-size: 9.9px;
+  padding-inline: 2.7px;
   cursor: pointer;
 }
 .select-all input {
   accent-color: var(--ace-accent);
-  width: 14px;
-  height: 14px;
+  width: 12.6px;
+  height: 12.6px;
   margin: 0;
 }
 
@@ -213,26 +213,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4.5px;
   min-width: 0;
 }
 .selection-tools button svg,
 .role-label svg {
-  width: 15px;
-  height: 15px;
+  width: 13.5px;
+  height: 13.5px;
   flex: none;
   vertical-align: middle;
 }
 .selection-tools button:last-child {
-  padding-inline: 2px;
+  padding-inline: 1.8px;
 }
 
 .message-picker:not(.picker-open) .selection-toggle {
-  border: 1px solid var(--ace-border);
-  border-radius: 9px;
-  padding: 11px 12px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 8.1px;
+  padding: 9.9px 10.8px;
   background: color-mix(in srgb, var(--ace-surface) 65%, var(--ace-soft));
-  margin: 10px 0 2px;
+  margin: 9px 0 1.8px;
   color: var(--ace-accent);
 }
 .message-picker:not(.picker-open) .selection-toggle:not(:disabled):hover {
@@ -243,20 +243,20 @@
   opacity: 1;
 }
 .picker-selection-icon {
-  width: 17px;
-  height: 17px;
+  width: 15.3px;
+  height: 15.3px;
   flex: none;
 }
 .selection-badge.loading {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4.5px;
 }
 .selection-badge.loading:before {
   content: "";
-  width: 9px;
-  height: 9px;
-  border: 1.5px solid var(--ace-border);
+  width: 8.1px;
+  height: 8.1px;
+  border: 1.35px solid var(--ace-border);
   border-top-color: var(--ace-accent);
   border-radius: 50%;
   animation: picker-spin 0.8s linear infinite;
@@ -273,11 +273,11 @@
 }
 
 .message-picker.picker-open .selection-toggle {
-  border: 1px solid var(--ace-border);
-  border-radius: 9px;
-  padding: 11px 12px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 8.1px;
+  padding: 9.9px 10.8px;
   background: color-mix(in srgb, var(--ace-surface) 65%, var(--ace-soft));
-  margin: 8px 0;
+  margin: 7.2px 0;
   color: var(--ace-accent);
 }
 .message-picker.picker-open .selection-toggle:hover {
@@ -286,5 +286,19 @@
 }
 
 /* One aligned icon slot for every speaker and filter. */
-.role-label { display: inline-flex; align-items: center; justify-content: center; height: 18px; }
-.selection-tools button svg, .role-label svg { width: 15px; height: 15px; min-width: 15px; max-width: 15px; min-height: 15px; max-height: 15px; display: block; }
+.role-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 16.2px;
+}
+.selection-tools button svg,
+.role-label svg {
+  width: 13.5px;
+  height: 13.5px;
+  min-width: 13.5px;
+  max-width: 13.5px;
+  min-height: 13.5px;
+  max-height: 13.5px;
+  display: block;
+}

@@ -11,7 +11,7 @@ button,
     box-shadow 140ms ease;
 }
 button:active:enabled {
-  transform: translateY(1px);
+  transform: translateY(0.9px);
 }
 .selection-toggle:active:enabled {
   transform: none;

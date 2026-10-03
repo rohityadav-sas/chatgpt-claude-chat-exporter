@@ -10,7 +10,7 @@
   --ace-error: #a43c30;
   color-scheme: light;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 13px;
+  font-size: 11.7px;
   color: var(--ace-ink);
 }
 :host([data-theme="dark"]) {
@@ -40,25 +40,25 @@ button:disabled {
 }
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid #78a98d;
-  outline-offset: 3px;
+  outline: 1.8px solid #78a98d;
+  outline-offset: 2.7px;
 }
 .signature {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 32px;
-  padding: 0 11px;
-  border: 1px solid var(--ace-border);
-  border-radius: 8px;
+  gap: 5.4px;
+  height: 28.8px;
+  padding: 0 9.9px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 7.2px;
   background: var(--ace-surface);
   color: var(--ace-accent);
-  font-size: 12.5px;
+  font-size: 11.25px;
   font-weight: 600;
-  letter-spacing: -0.15px;
+  letter-spacing: -0.135px;
   white-space: nowrap;
-  box-shadow: 0 1px 2px #00000005;
+  box-shadow: 0 0.9px 1.8px #00000005;
   transition:
     background 0.15s,
     border-color 0.15s;
@@ -69,8 +69,8 @@ input:focus-visible {
   border-color: #9bb69d;
 }
 .signature svg {
-  width: 15px;
-  height: 15px;
+  width: 13.5px;
+  height: 13.5px;
   flex: none;
 }
 [hidden] {
@@ -78,27 +78,27 @@ input:focus-visible {
 }
 .visually-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 0.9px;
+  height: 0.9px;
   padding: 0;
-  margin: -1px;
+  margin: -0.9px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
 }
 .panel {
-  width: 400px;
-  max-width: calc(100vw - 24px);
-  padding: 24px;
+  width: 360px;
+  max-width: calc(100vw - 21.6px);
+  padding: 21.6px;
   background: var(--ace-surface);
   color: var(--ace-ink);
-  border: 1px solid var(--ace-border);
-  border-radius: 16px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 14.4px;
   box-shadow:
-    0 12px 44px #00000024,
-    0 2px 6px #0000000a;
-  max-height: calc(100vh - 90px);
+    0 10.8px 39.6px #00000024,
+    0 1.8px 5.4px #0000000a;
+  max-height: calc(100vh - 81px);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -107,24 +107,24 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 22px;
+  gap: 10.8px;
+  margin-bottom: 19.8px;
   flex: none;
 }
 h2 {
   margin: 0;
-  font-size: 22px;
+  font-size: 19.8px;
   font-weight: 650;
-  letter-spacing: -0.65px;
+  letter-spacing: -0.585px;
 }
 .close {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 25.2px;
+  height: 25.2px;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: 5.4px;
   background: transparent;
   color: var(--ace-muted);
 }
@@ -132,38 +132,38 @@ h2 {
   background: var(--ace-soft);
 }
 .close svg {
-  width: 22px;
-  height: 22px;
+  width: 19.8px;
+  height: 19.8px;
 }
 .title {
   width: 100%;
   min-width: 0;
-  padding: 12px;
-  border: 1px solid var(--ace-border);
-  border-radius: 8px;
+  padding: 10.8px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 7.2px;
   background: var(--ace-surface);
   color: var(--ace-ink);
-  font-size: 16px;
+  font-size: 14.4px;
   flex: none;
 }
 .count {
   color: var(--ace-muted);
-  font-size: 13px;
-  margin: 9px 0 12px;
-  min-height: 16px;
+  font-size: 11.7px;
+  margin: 8.1px 0 10.8px;
+  min-height: 14.4px;
   flex: none;
 }
 fieldset {
   padding: 0;
   border: 0;
-  margin: 18px 0;
+  margin: 16.2px 0;
   min-width: 0;
   flex: none;
 }
 .formats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 9px;
+  gap: 8.1px;
 }
 .format {
   position: relative;
@@ -172,25 +172,25 @@ fieldset {
 .format input {
   position: absolute;
   opacity: 0;
-  width: 1px;
-  height: 1px;
+  width: 0.9px;
+  height: 0.9px;
 }
 .format > span {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 82px;
-  border: 1px solid var(--ace-border);
-  border-radius: 10px;
-  font-size: 14px;
+  gap: 8.1px;
+  min-height: 73.8px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 9px;
+  font-size: 12.6px;
   font-weight: 600;
   color: var(--ace-muted);
 }
 .format svg {
-  width: 26px;
-  height: 26px;
+  width: 23.4px;
+  height: 23.4px;
 }
 .format:hover > span {
   background: var(--ace-soft);
@@ -199,30 +199,30 @@ fieldset {
   color: var(--ace-accent);
   background: var(--ace-soft);
   border-color: #83a58a;
-  box-shadow: 0 0 0 1px #83a58a;
+  box-shadow: 0 0 0 0.9px #83a58a;
 }
 .format input:focus-visible + span {
-  outline: 2px solid #78a98d;
-  outline-offset: 2px;
+  outline: 1.8px solid #78a98d;
+  outline-offset: 1.8px;
 }
 .save {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 9px;
   width: 100%;
   border: 0;
-  border-radius: 9px;
-  padding: 13px;
+  border-radius: 8.1px;
+  padding: 11.7px;
   background: #255c46;
   color: #fffefb;
-  font-size: 16px;
+  font-size: 14.4px;
   font-weight: 600;
   flex: none;
 }
 .save svg {
-  width: 21px;
-  height: 21px;
+  width: 18.9px;
+  height: 18.9px;
 }
 .save:hover:enabled {
   background: #1d4938;
@@ -236,9 +236,9 @@ fieldset {
 }
 .status {
   color: var(--ace-accent);
-  font-size: 11px;
+  font-size: 9.9px;
   line-height: 1.5;
-  margin: 9px 0 0;
+  margin: 8.1px 0 0;
   min-height: 0;
   flex: none;
 }
@@ -252,34 +252,34 @@ fieldset {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 12px;
+  margin-top: 10.8px;
   flex: none;
 }
 .note {
   color: var(--ace-muted);
-  font-size: 10px;
+  font-size: 9px;
 }
 .refresh {
   padding: 0;
   background: transparent;
   color: var(--ace-muted);
   border: 0;
-  font-size: 10px;
+  font-size: 9px;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 2.7px;
 }
-@media (max-width: 600px) {
+@media (max-width: 540px) {
   .signature {
-    padding: 0 8px;
-    height: 30px;
-    font-size: 12px;
-    gap: 4px;
+    padding: 0 7.2px;
+    height: 27px;
+    font-size: 10.8px;
+    gap: 3.6px;
   }
   .panel {
-    padding: 18px;
+    padding: 16.2px;
   }
   h2 {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -291,7 +291,7 @@ fieldset {
   height: auto;
 }
 .panel.selecting .heading {
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 }
 .panel.selecting .title,
 .panel.selecting fieldset {
@@ -302,31 +302,31 @@ fieldset {
 }
 .panel.selecting .message-picker {
   flex: 0 1 auto;
-  margin-bottom: 16px;
+  margin-bottom: 14.4px;
 }
 .panel.selecting .selection-detail {
   flex: 0 1 auto;
 }
 .panel.selecting .message-list {
-  max-height: max(100px, calc(100vh - 330px));
+  max-height: max(90px, calc(100vh - 297px));
 }
 .export-actions {
   display: flex;
-  gap: 10px;
+  gap: 9px;
   flex: none;
 }
 .compact-format {
   display: none;
-  border: 1px solid var(--ace-border);
-  border-radius: 8px;
-  padding: 10px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 7.2px;
+  padding: 9px;
   font: inherit;
   color: var(--ace-ink);
   background: var(--ace-surface);
 }
 .panel.selecting .compact-format {
   display: block;
-  width: 124px;
+  width: 111.6px;
 }
 .panel.selecting .save {
   flex: 1;
@@ -339,26 +339,26 @@ fieldset {
   display: none;
 }
 .export-progress {
-  margin-top: 12px;
+  margin-top: 10.8px;
 }
 .progress-label {
   display: block;
   text-align: right;
-  font-size: 11px;
+  font-size: 9.9px;
   color: #527260;
   font-variant-numeric: tabular-nums;
-  margin-bottom: 5px;
+  margin-bottom: 4.5px;
 }
 .progress-track {
-  height: 3px;
-  border-radius: 9px;
+  height: 2.7px;
+  border-radius: 8.1px;
   background: #e2ebe2;
   overflow: hidden;
 }
 .progress-fill {
   height: 100%;
   width: 0;
-  border-radius: 9px;
+  border-radius: 8.1px;
   background: #255c46;
   transition: width 0.18s ease;
 }
@@ -373,11 +373,11 @@ fieldset {
 }
 
 .panel:not(.selecting) .heading {
-  margin-bottom: 6px;
+  margin-bottom: 5.4px;
   align-items: center;
 }
 .panel:not(.selecting) h2 {
-  font-size: 13px;
+  font-size: 11.7px;
   font-weight: 600;
   color: var(--ace-muted);
 }
@@ -388,12 +388,12 @@ fieldset {
 
 .export-actions {
   align-items: stretch;
-  gap: 10px;
+  gap: 9px;
 }
 .export-actions .save,
 .export-actions .export-save {
-  height: 44px !important;
-  border-radius: 9px !important;
+  height: 39.6px !important;
+  border-radius: 8.1px !important;
   margin: 0 !important;
 }
 
@@ -407,15 +407,15 @@ fieldset {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border: 1px solid var(--ace-border, #d7e4d7);
-  border-radius: 9px;
+  gap: 7.2px;
+  border: 0.9px solid var(--ace-border, #d7e4d7);
+  border-radius: 8.1px;
   color: var(--ace-ink, #254638);
   background: var(--ace-surface, #fbfdf9);
   font: inherit;
   font-weight: 600;
-  height: 44px;
-  padding: 0 15px;
+  height: 39.6px;
+  padding: 0 13.5px;
   cursor: pointer;
   transition:
     background 0.18s ease,
@@ -423,13 +423,13 @@ fieldset {
     box-shadow 0.18s ease;
 }
 .copy-action svg {
-  width: 18px;
-  height: 18px;
+  width: 16.2px;
+  height: 16.2px;
   flex: none;
 }
 .copy-action:hover:enabled {
   background: #edf5ec;
-  box-shadow: 0 2px 7px #255c4612;
+  box-shadow: 0 1.8px 6.3px #255c4612;
 }
 .copy-action:active:enabled {
   transform: scale(0.97);
@@ -439,17 +439,17 @@ fieldset {
   cursor: default;
 }
 .copy-action:focus-visible {
-  outline: 2px solid #7aa68b;
-  outline-offset: 2px;
+  outline: 1.8px solid #7aa68b;
+  outline-offset: 1.8px;
 }
 .provider-pill {
-  font-size: 10px;
+  font-size: 9px;
   white-space: nowrap;
-  border: 1px solid var(--ace-border, #d7e4d7);
+  border: 0.9px solid var(--ace-border, #d7e4d7);
   background: #f2f7ef;
   color: #617565;
-  border-radius: 99px;
-  padding: 4px 8px;
+  border-radius: 89.1px;
+  padding: 3.6px 7.2px;
   margin-left: auto;
 }
 .export-actions {
@@ -459,7 +459,7 @@ fieldset {
 .export-actions .export-save {
   flex: 1;
   width: auto;
-  min-width: 120px;
+  min-width: 108px;
 }
 @media (prefers-reduced-motion: reduce) {
   .copy-action {
@@ -478,6 +478,13 @@ fieldset {
 
 .export-actions .copy-action,
 .export-actions .save,
-.export-actions .export-save { box-sizing: border-box; padding-inline: 13px; border-width: 1px; border-style: solid; }
+.export-actions .export-save {
+  box-sizing: border-box;
+  padding-inline: 11.7px;
+  border-width: 0.9px;
+  border-style: solid;
+}
 .export-actions .save,
-.export-actions .export-save { border-color: transparent; }
+.export-actions .export-save {
+  border-color: transparent;
+}

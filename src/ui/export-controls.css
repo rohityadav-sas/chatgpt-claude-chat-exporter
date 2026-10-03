@@ -1,20 +1,120 @@
 /* Shared popup and embedded dialog visual contract. */
-.popup,.panel {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;line-height:normal;width:400px;padding:24px;border:1px solid var(--ace-border);border-radius:16px;background:var(--ace-surface);color:var(--ace-ink)}
-.popup .export-heading,.panel .heading {padding:0;gap:12px;margin:0 0 6px;align-items:center}
-.popup main,.popup:not(.selecting) main {padding:0}
-.popup .export-heading h1,.panel h2 {margin:0;font-size:13px;font-weight:600;letter-spacing:0;color:var(--ace-muted)}
-.popup.selecting .export-heading,.panel.selecting .heading {margin-bottom:22px}
-.popup.selecting h1,.panel.selecting h2 {font-size:22px;font-weight:650;letter-spacing:-.65px;color:var(--ace-ink)}
-.popup #title,.panel .title {height:47px;font-size:16px;padding:12px;line-height:normal}
-.popup .close-export,.panel .close {width:28px;height:28px;border-radius:6px;flex:none}
-.popup .close-export:hover,.panel .close:hover {background:var(--ace-soft)}
-.popup fieldset,.panel fieldset {margin:18px 0}
-.popup .formats span,.panel .format>span {min-height:82px;font-size:14px;gap:9px}
-.popup .formats label:hover>span {background:var(--ace-soft)}
-.popup .export-actions,.panel .export-actions {gap:10px}
-.popup .copy-action,.panel .copy-action {font:600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.popup .export-save,.panel .save {font:600 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;gap:10px}
-.popup .provider-pill,.panel .provider-pill {font:400 10px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:normal;padding:4px 8px}
+.popup,
+.panel {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11.7px;
+  line-height: normal;
+  width: 360px;
+  padding: 21.6px;
+  border: 0.9px solid var(--ace-border);
+  border-radius: 14.4px;
+  background: var(--ace-surface);
+  color: var(--ace-ink);
+}
+.popup .export-heading,
+.panel .heading {
+  padding: 0;
+  gap: 10.8px;
+  margin: 0 0 5.4px;
+  align-items: center;
+}
+.popup main,
+.popup:not(.selecting) main {
+  padding: 0;
+}
+.popup .export-heading h1,
+.panel h2 {
+  margin: 0;
+  font-size: 11.7px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ace-muted);
+}
+.popup.selecting .export-heading,
+.panel.selecting .heading {
+  margin-bottom: 19.8px;
+}
+.popup.selecting h1,
+.panel.selecting h2 {
+  font-size: 19.8px;
+  font-weight: 650;
+  letter-spacing: -0.585px;
+  color: var(--ace-ink);
+}
+.popup #title,
+.panel .title {
+  height: 42.3px;
+  font-size: 14.4px;
+  padding: 10.8px;
+  line-height: normal;
+}
+.popup .close-export,
+.panel .close {
+  width: 25.2px;
+  height: 25.2px;
+  border-radius: 5.4px;
+  flex: none;
+}
+.popup .close-export:hover,
+.panel .close:hover {
+  background: var(--ace-soft);
+}
+.popup fieldset,
+.panel fieldset {
+  margin: 16.2px 0;
+}
+.popup .formats span,
+.panel .format > span {
+  min-height: 73.8px;
+  font-size: 12.6px;
+  gap: 8.1px;
+}
+.popup .formats label:hover > span {
+  background: var(--ace-soft);
+}
+.popup .export-actions,
+.panel .export-actions {
+  gap: 9px;
+}
+.popup .copy-action,
+.panel .copy-action {
+  font:
+    600 11.7px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+.popup .export-save,
+.panel .save {
+  font:
+    600 14.4px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  gap: 9px;
+}
+.popup .provider-pill,
+.panel .provider-pill {
+  font:
+    400 9px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: normal;
+  padding: 3.6px 7.2px;
+}
 
-.popup .provider-pill {display:inline-flex;align-items:center;gap:5px}
-.popup .provider-pill svg {width:13px;height:13px;flex:none;display:block}
+.popup .provider-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4.5px;
+}
+.popup .provider-pill svg {
+  width: 11.7px;
+  height: 11.7px;
+  flex: none;
+  display: block;
+}
+
+/* Invisible native radio targets retain a full CSS pixel for keyboard/browser activation. */
+.popup .formats input,.panel .format input {width:1px;height:1px}

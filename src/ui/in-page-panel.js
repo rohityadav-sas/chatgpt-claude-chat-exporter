@@ -203,10 +203,10 @@ export function createExportPanel(document, signature, provider) {
   }
   function position() {
     const rect = signature.host.getBoundingClientRect();
-    const width = Math.min(400, document.defaultView.innerWidth - 24);
-    host.style.left = `${Math.max(12, Math.min(rect.right - width, document.defaultView.innerWidth - width - 12))}px`;
-    host.style.top = `${Math.max(8, rect.bottom + 9)}px`;
-    panel.style.maxHeight = `${Math.max(160, document.defaultView.innerHeight - Math.max(8, rect.bottom + 9) - 12)}px`;
+    const width = Math.min(360, document.defaultView.innerWidth - 21.6);
+    host.style.left = `${Math.max(10.8, Math.min(rect.right - width, document.defaultView.innerWidth - width - 10.8))}px`;
+    host.style.top = `${Math.max(7.2, rect.bottom + 8.1)}px`;
+    panel.style.maxHeight = `${Math.max(144, document.defaultView.innerHeight - Math.max(7.2, rect.bottom + 8.1) - 10.8)}px`;
   }
   let closing;
   function hide({ focus = true } = {}) {
