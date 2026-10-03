@@ -8,20 +8,15 @@ Category: Workflow & Planning
 
 ## Description
 
-Save AI conversations as clean PDFs, Markdown, JSON or plain text. Choose individual messages or export the whole active conversation.
+Export AI conversations to Markdown, JSON, Text and PDF.
 
-Works with ChatGPT, Claude, Gemini, Grok, DeepSeek, Qwen, Perplexity and Mistral.
+Save a whole conversation or select individual messages. PDF exports use a readable chat layout with formatted code blocks and available pasted text.
 
-- Export ChatGPT conversations to PDF or Markdown.
-- Save Claude chats with available pasted text and readable code blocks.
-- Download chat-style PDFs with user and AI messages, original provider icons and selectable text.
-- Select exactly which messages to keep.
-- Copy a loaded webpage as Markdown from the right-click menu.
-- Convert locally without an extension account, analytics or an export server.
+You can also copy the currently loaded webpage as Markdown from the right-click menu.
 
-Conversation extraction runs on demand using your existing provider session. If complete conversation data is unavailable, the extension clearly identifies a partial export of rendered messages. Binary attachments, unloaded page content and hidden tool internals are not exported.
+Conversion happens locally in your browser, without an extension account or export server. Unavailable attachments and unloaded content are not included. When complete conversation data is unavailable, partial exports are clearly identified.
 
-Independent extension. Not affiliated with OpenAI, Anthropic or other supported AI providers.
+Independent extension, not affiliated with AI providers.
 
 ## Privacy tab
 
