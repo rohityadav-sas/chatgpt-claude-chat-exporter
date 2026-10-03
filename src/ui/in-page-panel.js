@@ -117,10 +117,10 @@ export function createExportPanel(document, signature, provider) {
   function syncActions() {
     save.disabled =
       capturing || exporting || !conversation || picker.count === 0;
-    copy.disabled = save.disabled;
+    copy.disabled = save.disabled || format === "pdf";
     copy.title =
       format === "pdf"
-        ? "Copy as Markdown (PDF is download only)"
+        ? "PDF is download only"
         : "Copy selected messages";
   }
   const formats = element(document, "div", { className: "formats" });

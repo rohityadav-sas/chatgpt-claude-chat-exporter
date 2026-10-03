@@ -46,11 +46,12 @@ $("message-selection").append(picker.host);
 $("export").prepend(icon(document));
 $("copy").prepend(icon(document, "copy"));
 function syncActions() {
-  $("export").disabled = $("copy").disabled =
+  $("export").disabled =
     exporting || !conversation || !picker.count;
+  $("copy").disabled = $("export").disabled || selectedFormat() === "pdf";
   $("copy").title =
     selectedFormat() === "pdf"
-      ? "Copy as Markdown (PDF is download only)"
+      ? "PDF is download only"
       : "Copy selected messages";
 }
 $("close").append(icon(document, "close"));
