@@ -45,7 +45,7 @@ try {
   await fixture.route("https://chatgpt.com/**", (route) =>
     route.fulfill({
       contentType: "text/html; charset=utf-8",
-      body: '<title>Browser test - ChatGPT</title><main><div data-message-author-role="user"><div class="whitespace-pre-wrap">Keep नेपाली &amp; Unicode</div></div><div data-message-author-role="assistant"><div class="markdown"><h2>Answer</h2><p><strong>Formatting</strong> survives.</p><pre><code class="language-js">const n = 42;</code></pre><table><tr><th>One</th><th>Two</th></tr><tr><td>1</td><td>2</td></tr></table></div></div></main>',
+      body: '<title>Browser test - ChatGPT</title><main><div data-message-author-role="user"><div class="whitespace-pre-wrap">Keep à¤¨à¥‡à¤ªà¤¾à¤²à¥€ &amp; Unicode</div></div><div data-message-author-role="assistant"><div class="markdown"><h2>Answer</h2><p><strong>Formatting</strong> survives.</p><pre><code class="language-js">const n = 42;</code></pre><table><tr><th>One</th><th>Two</th></tr><tr><td>1</td><td>2</td></tr></table></div></div></main>',
     }),
   );
   await fixture.goto("https://chatgpt.com/c/test");
@@ -59,7 +59,7 @@ try {
   const bundle = await readFile("dist/content.js", "utf8");
   const extracted = await fixture.evaluate(bundle);
   assert.equal(extracted.conversation.messages.length, 2);
-  assert.ok(extracted.conversation.messages[0].text.includes("नेपाली"));
+  assert.ok(extracted.conversation.messages[0].text.includes("à¤¨à¥‡à¤ªà¤¾à¤²à¥€"));
   const fixtureTab = await popup.evaluate(async () =>
     (await chrome.tabs.query({})).find((tab) =>
       tab.url?.startsWith("https://chatgpt.com"),
@@ -72,10 +72,10 @@ try {
     chrome.tabs.query = async () => [tab];
   }, fixtureTab);
   await popup.reload();
-  await popup.getByText("ChatGPT · supported").waitFor({ state: "attached" });
+  await popup.getByText("ChatGPT Â· supported").waitFor({ state: "attached" });
   await popup.reload();
   await popup
-    .getByText("2 messages · 1 from you")
+    .getByText("2 messages Â· 1 from you")
     .waitFor({ state: "attached" });
   for (const format of ["md", "json", "txt"]) {
     await popup.locator(`input[value="${format}"]`).check();
@@ -85,7 +85,7 @@ try {
     const target = path.join(root, "artifacts", download.suggestedFilename());
     await download.saveAs(target);
     const data = await readFile(target, "utf8");
-    assert.ok(data.includes("नेपाली"));
+    assert.ok(data.includes("à¤¨à¥‡à¤ªà¤¾à¤²à¥€"));
     if (format === "json") assert.equal(JSON.parse(data).messages.length, 2);
   }
   await popup.locator('input[value="pdf"]').check();
@@ -105,7 +105,7 @@ try {
           markdown:
             "Message " +
             index +
-            " नेपाली\n\n" +
+            " à¤¨à¥‡à¤ªà¤¾à¤²à¥€\n\n" +
             "A readable paragraph with preserved words. ".repeat(100),
         }));
         messages.push({
@@ -232,7 +232,7 @@ try {
   });
   await popup.reload();
   await popup
-    .getByText("20 messages · 10 from you")
+    .getByText("20 messages Â· 10 from you")
     .waitFor({ state: "attached" });
   const virtualCapture = await popup.evaluate(
     async (tabId) =>
@@ -283,7 +283,10 @@ try {
   await popup.getByRole("button", { name: "Invert", exact: true }).click();
   assert.equal(await popup.locator(".selection-badge").textContent(), "20/20");
   await popup.locator("#copy").click();
-  await popup.getByText("Copied.", { exact: true }).waitFor();
+  await popup.waitForFunction(() => document.querySelector("#copy svg path")?.getAttribute("d") === "m5 12 4 4L19 6");
+  assert.equal(await popup.getByText("Copied.", { exact: true }).count(), 0);
+  const widths = await popup.locator(".export-actions").evaluate(node => [node.querySelector("#copy").getBoundingClientRect().width, node.querySelector("#export").getBoundingClientRect().width]);
+  assert.ok(Math.abs(widths[0] - widths[1]) < 1);
   assert.equal(await popup.locator("#copy").isEnabled(), true);
   assert.equal(await popup.locator("#extract").count(), 0);
   // Clear empty chat state: stale exports must be disabled after failed extraction.

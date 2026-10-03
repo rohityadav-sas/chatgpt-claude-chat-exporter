@@ -73,7 +73,7 @@ export function createExportPanel(document, signature, provider) {
   const progress = createExportProgress(document);
   const count = element(document, "p", {
     className: "count",
-    textContent: "Reading conversation…",
+    textContent: "Reading conversationâ€¦",
   });
   const status = element(document, "p", {
     className: "status",
@@ -111,7 +111,7 @@ export function createExportPanel(document, signature, provider) {
   );
   const providerPill = element(document, "span", {
     className: "provider-pill",
-    textContent: provider.name + " � supported",
+    textContent: provider.name + " \u00b7 supported",
   });
   function syncActions() {
     save.disabled =
@@ -250,7 +250,7 @@ export function createExportPanel(document, signature, provider) {
     );
     title.value = previewTitle;
     title.disabled = false;
-    count.textContent = "Reading conversation…";
+    count.textContent = "Reading conversationâ€¦";
     setStatus("");
     try {
       const chat = await captureConversation(
@@ -263,7 +263,7 @@ export function createExportPanel(document, signature, provider) {
       if (request !== generation) return;
       conversation = chat;
       if (title.value === previewTitle) title.value = chat.title;
-      count.textContent = `${chat.messages.length} messages · ${chat.messages.filter((message) => message.role === "user").length} from you`;
+      count.textContent = `${chat.messages.length} messages Â· ${chat.messages.filter((message) => message.role === "user").length} from you`;
       title.disabled = false;
       picker.setConversation(chat);
       const partial = chat.capture && !chat.capture.complete;
@@ -335,7 +335,7 @@ export function createExportPanel(document, signature, provider) {
       if (copying) {
         await copyExport(chat, format);
         completed(copy);
-        setStatus("Copied" + (format === "pdf" ? " as Markdown" : "") + ".");
+  
       } else if (format === "pdf") {
         await downloadPdf(chat, progress.update);
       } else {

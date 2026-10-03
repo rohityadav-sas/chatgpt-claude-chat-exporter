@@ -71,7 +71,7 @@ async function init() {
     [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const provider = findProvider(tab?.url);
     $("provider").textContent = provider
-      ? `${provider.name} · supported`
+      ? `${provider.name} Â· supported`
       : "Open a supported conversation";
 
     if (!provider)
@@ -109,7 +109,7 @@ async function extract() {
     if ($("title").value === previewTitle)
       $("title").value = conversation.title;
     $("count").textContent =
-      `${conversation.messages.length} messages · ${conversation.messages.filter((message) => message.role === "user").length} from you`;
+      `${conversation.messages.length} messages Â· ${conversation.messages.filter((message) => message.role === "user").length} from you`;
     $("summary").hidden = false;
     picker.setConversation(conversation);
     const partial = conversation.capture && !conversation.capture.complete;
@@ -145,7 +145,7 @@ async function performAction(copying = false) {
     if (copying) {
       await copyExport(chat, format);
       completed($("copy"));
-      status("Copied" + (format === "pdf" ? " as Markdown" : "") + ".");
+
     } else if (format === "pdf") {
       await downloadPdf(chat, progress.update);
     } else {
