@@ -54,7 +54,7 @@ input:focus-visible {
   border-radius: 7.2px;
   background: var(--ace-surface);
   color: var(--ace-accent);
-  font-size: 11.25px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.135px;
   white-space: nowrap;
@@ -69,8 +69,8 @@ input:focus-visible {
   border-color: #9bb69d;
 }
 .signature svg {
-  width: 13.5px;
-  height: 13.5px;
+  width: 15px;
+  height: 15px;
   flex: none;
 }
 [hidden] {
@@ -272,7 +272,7 @@ fieldset {
   .signature {
     padding: 0 7.2px;
     height: 27px;
-    font-size: 10.8px;
+    font-size: 13px;
     gap: 3.6px;
   }
   .panel {
