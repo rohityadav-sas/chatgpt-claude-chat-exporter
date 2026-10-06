@@ -33,14 +33,14 @@ export function resetCompleted(button) {
   if (!state) return;
   clearTimeout(state.timer);
   state.animations.forEach((animation) => animation?.cancel());
-  svg.innerHTML = state.original;
+  svg.replaceChildren(...state.original.map(node => node.cloneNode(true)));
   confirmations.delete(svg);
 }
 export function completed(button) {
   const svg = button.querySelector("svg");
   if (!svg) return;
   resetCompleted(button);
-  const state = { original: svg.innerHTML, animations: [], timer: null };
+  const state = { original: Array.from(svg.childNodes, node => node.cloneNode(true)), animations: [], timer: null };
   confirmations.set(svg, state);
   const animate = (frames, duration) => {
     const animation = motion(svg, frames, duration);
@@ -56,9 +56,9 @@ export function completed(button) {
       100,
     );
     if (confirmations.get(svg) !== state) return;
-    svg.innerHTML =
-      '<path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
-    const path = svg.querySelector("path");
+    const path = svg.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "path");
+    for (const [name, value] of Object.entries({d:"m5 13 4 4L19 7",fill:"none",stroke:"currentColor","stroke-width":"2","stroke-linecap":"round","stroke-linejoin":"round"})) path.setAttribute(name, value);
+    svg.replaceChildren(path);
     const draw = motion(
       path,
       [
@@ -79,7 +79,7 @@ export function completed(button) {
     state.timer = setTimeout(async () => {
       await animate([{ opacity: 1 }, { opacity: 0 }], 90);
       if (confirmations.get(svg) !== state) return;
-      svg.innerHTML = state.original;
+      svg.replaceChildren(...state.original.map(node => node.cloneNode(true)));
       await animate([{ opacity: 0 }, { opacity: 1 }], 120);
       if (confirmations.get(svg) === state) confirmations.delete(svg);
     }, 1000);

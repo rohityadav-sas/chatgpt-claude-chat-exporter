@@ -129,7 +129,7 @@ async function ensurePdfDocument() {
 async function ensureToolsDocument() {
   // Firefox event pages have a DOM but no chrome.offscreen API.
   // Keep the tools in a separate extension frame so runtime messages reach it.
-  if (!chrome.offscreen) {
+  if (__FIREFOX_BUILD__ || !chrome.offscreen) {
     if (!creatingPdfDocument)
       creatingPdfDocument = new Promise((resolve, reject) => {
         const frame = document.createElement("iframe");
