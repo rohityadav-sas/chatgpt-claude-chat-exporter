@@ -1,3 +1,4 @@
+import { writeClipboard } from "./core/clipboard.js";
 import logoSvg from "../assets/icon.svg";
 import { createExport } from "./core/formats.js";
 import { findProvider } from "./providers/index.js";
@@ -43,11 +44,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
       if (!fromPopup) await requireConversationTab(sender, message.url);
       if (typeof message.text !== "string")
         throw Error("Invalid clipboard content.");
-      await ensureToolsDocument();
-      return await chrome.runtime.sendMessage({
-        type: "ai-chat-exporter:copy-clipboard",
-        text: message.text,
-      });
+      return await writeClipboard(message.text, ensureToolsDocument);
     })().then(respond, (error) => respond({ error: error.message }));
     return true;
   }
@@ -130,6 +127,24 @@ async function ensurePdfDocument() {
   if (!result?.success) throw Error(result?.error || "PDF module unavailable.");
 }
 async function ensureToolsDocument() {
+  // Firefox event pages have a DOM but no chrome.offscreen API.
+  // Keep the tools in a separate extension frame so runtime messages reach it.
+  if (!chrome.offscreen) {
+    if (!creatingPdfDocument)
+      creatingPdfDocument = new Promise((resolve, reject) => {
+        const frame = document.createElement("iframe");
+        frame.hidden = true;
+        frame.src = chrome.runtime.getURL(scriptDirectory + "pdf.html");
+        frame.onload = resolve;
+        frame.onerror = () => reject(Error("Export tools could not load."));
+        document.body.append(frame);
+      }).catch((error) => {
+        creatingPdfDocument = undefined;
+        throw error;
+      });
+    await creatingPdfDocument;
+    return;
+  }
   if (await chrome.offscreen.hasDocument()) return;
   if (!creatingPdfDocument)
     creatingPdfDocument = chrome.offscreen
@@ -168,11 +183,7 @@ async function copyWebsite(tabId) {
     const data = capture?.result;
     if (!data?.markdown)
       throw Error(data?.error || "This browser page cannot be copied.");
-    await ensureToolsDocument();
-    const result = await chrome.runtime.sendMessage({
-      type: "ai-chat-exporter:copy-clipboard",
-      text: data.markdown,
-    });
+    const result = await writeClipboard(data.markdown, ensureToolsDocument);
     if (!result?.success)
       throw Error(result?.error || "Clipboard copy failed.");
     await chrome.action.setBadgeText({ tabId, text: "" });

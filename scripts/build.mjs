@@ -21,6 +21,12 @@ manifest.background.service_worker = "background.js";
 manifest.content_scripts.forEach((script) => {
   script.js = script.js.map((name) => name.replace(/^dist\//, ""));
 });
+if (process.argv.includes("--firefox")) {
+  manifest.background = { scripts: ["background.js"] };
+  manifest.permissions = manifest.permissions.filter(permission => permission !== "offscreen");
+  delete manifest.minimum_chrome_version;
+  manifest.browser_specific_settings = { gecko: { id: "chatgpt-claude-exporter@rohityadav.se", strict_min_version: "140.0", data_collection_permissions: { required: ["none"] } } };
+}
 await writeFile("dist/manifest.json", JSON.stringify(manifest, null, 2));
 const options = {
   outdir: "dist",
