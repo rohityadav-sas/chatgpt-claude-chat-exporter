@@ -40,7 +40,30 @@ export function findHeaderPlacement(document, provider) {
     case "chatgpt": {
       const group = query('[data-testid="thread-header-right-actions"]');
       const share = query('#page-header [data-testid="share-chat-button"]');
-      return before(group, directChild(group, share), document);
+      const existing = before(group, directChild(group, share), document);
+      if (existing) return existing;
+      // Header layouts differ between accounts and responsive breakpoints.
+      // Anchor to the conversation Share action when the old action group is absent.
+      const headers =
+        'header, #page-header, #conversation-header, [data-testid="conversation-header"]';
+      const candidates = Array.from(
+        document.querySelectorAll(
+          '[data-testid="share-chat-button"], header button, #page-header button, #conversation-header button, [data-testid="conversation-header"] button',
+        ),
+      );
+      const action = candidates.find(
+        (node) =>
+          !node.closest(
+            'article, [data-message-author-role], [data-testid^="conversation-turn"], aside, nav',
+          ) &&
+          (node.dataset.testid === "share-chat-button" ||
+            (node.closest(headers) &&
+              /^(share|share chat|share conversation)$/i.test(
+                node.getAttribute("aria-label") || node.textContent.trim(),
+              ))) &&
+          visibleHeader(node, document),
+      );
+      return before(action?.parentElement, action, document);
     }
     case "grok": {
       const share = query('main button[aria-label="Create share link"]');

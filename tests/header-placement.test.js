@@ -36,3 +36,22 @@ test("No matching header means no arbitrary placement near a message Share butto
   ])
     assert.equal(findHeaderPlacement(document, provider), null);
 });
+
+test("ChatGPT newer header can anchor to Share without the old action-group test id", () => {
+  for (const markup of [
+    '<header><div><button aria-label="Share">Share</button><button>More</button></div></header>',
+    '<div id="page-header"><div><button data-testid="share-chat-button">Share</button></div></div>',
+  ]) {
+    const document = new JSDOM(markup).window.document;
+    const share = document.querySelector("button");
+    share.getBoundingClientRect = () => ({
+      width: 64,
+      height: 32,
+      top: 8,
+      right: 1000,
+    });
+    const placement = findHeaderPlacement(document, "chatgpt");
+    assert.equal(placement.before, share);
+    assert.equal(placement.container, share.parentElement);
+  }
+});
