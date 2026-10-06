@@ -48,7 +48,7 @@ input:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 5.4px;
-  height: 28.8px;
+  height: 32px;
   padding: 0 9.9px;
   border: 0.9px solid var(--ace-border);
   border-radius: 7.2px;
@@ -271,7 +271,7 @@ fieldset {
 @media (max-width: 540px) {
   .signature {
     padding: 0 7.2px;
-    height: 27px;
+    height: 30px;
     font-size: 13px;
     gap: 3.6px;
   }
