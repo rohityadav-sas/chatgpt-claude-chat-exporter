@@ -1,6 +1,6 @@
 // Require rendered conversation content, not merely a saved-chat URL or header.
 const selectors = {
- chatgpt: '[data-message-author-role="user"], [data-message-author-role="assistant"]',
+ chatgpt: '[data-message-author-role="user"], [data-message-author-role="assistant"], main [data-testid^="conversation-turn-"], main article[data-turn="user"], main article[data-turn="assistant"]',
  claude: '[data-testid="user-message"], [data-testid="assistant-message"]',
  grok: '.message-bubble, [data-testid="user-message"], [data-testid="assistant-message"]',
  deepseek: '.ds-message',

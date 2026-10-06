@@ -73,6 +73,25 @@ try {
       name: "Export conversation",
     });
     await exportButton.waitFor();
+    if (provider === "chatgpt") {
+      await page.evaluate(() => {
+        document.querySelector("article").setAttribute("data-testid", "conversation-turn-0");
+        for (const node of document.querySelectorAll("[data-message-author-role]")) {
+          node.dataset.savedAuthor = node.getAttribute("data-message-author-role");
+          node.removeAttribute("data-message-author-role");
+        }
+      });
+      // Let both the DOM observer and periodic reconciliation run.
+      await page.waitForTimeout(800);
+      assert.equal(await exportButton.isVisible(), true);
+      await page.evaluate(() => {
+        document.querySelector("article").removeAttribute("data-testid");
+        for (const node of document.querySelectorAll("[data-saved-author]")) {
+          node.setAttribute("data-message-author-role", node.dataset.savedAuthor);
+          delete node.dataset.savedAuthor;
+        }
+      });
+    }
     await page.evaluate(() => {
       window.savedTurns = document.createDocumentFragment();
       const article = document.querySelector("article");
