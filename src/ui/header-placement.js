@@ -44,23 +44,20 @@ export function findHeaderPlacement(document, provider) {
       if (existing) return existing;
       // Header layouts differ between accounts and responsive breakpoints.
       // Anchor to the conversation Share action when the old action group is absent.
-      const headers =
-        'header, #page-header, #conversation-header, [data-testid="conversation-header"]';
       const candidates = Array.from(
         document.querySelectorAll(
-          '[data-testid="share-chat-button"], header button, #page-header button, #conversation-header button, [data-testid="conversation-header"] button',
+          '[data-testid="share-chat-button"], button, [role="button"]',
         ),
       );
       const action = candidates.find(
         (node) =>
           !node.closest(
-            'article, [data-message-author-role], [data-testid^="conversation-turn"], aside, nav',
+            'article, [data-message-author-role], [data-testid^="conversation-turn"], aside, [data-ai-chat-exporter]',
           ) &&
           (node.dataset.testid === "share-chat-button" ||
-            (node.closest(headers) &&
-              /^(share|share chat|share conversation)$/i.test(
-                node.getAttribute("aria-label") || node.textContent.trim(),
-              ))) &&
+            /^(share|share chat|share conversation)$/i.test(
+              node.getAttribute("aria-label") || node.textContent.trim(),
+            )) &&
           visibleHeader(node, document),
       );
       return before(action?.parentElement, action, document);
